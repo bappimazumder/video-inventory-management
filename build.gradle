@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.bappi'
-version = '0.0.1-SNAPSHOT'
+version = ''
 
 java {
 	toolchain {
@@ -24,11 +24,22 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	mapstructVersion = "1.4.2.Final" as Object
+	lombokVersion = "1.18.20" as Object
+	lombokMapstructBindingVersion = "0.2.0" as Object
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'commons-fileupload:commons-fileupload:1.5'
 	compileOnly 'org.projectlombok:lombok'
+	implementation "org.mapstruct:mapstruct:${mapstructVersion}", "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}",
+			"org.projectlombok:lombok:${lombokVersion}",
+			"org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
@@ -39,4 +50,11 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+bootJar{
+	enabled = false
+}
+
+jar {
+	enabled = true
 }
