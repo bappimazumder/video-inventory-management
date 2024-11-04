@@ -8,6 +8,6 @@ import lombok.Setter;
 public class VideoInfoRequestDto {
     private String title;
     private String description;
-    private String userCode;
+    private Long userId;
 
 }

@@ -11,10 +11,25 @@ spring:
     password: 123456
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
     open-in-view: false
     properties:
       hibernate:
         format_sql: true
         generate_statistics: false
     show-sql: true
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+
+file:
+  upload-dir: D:\Job\Celestial Invention\video-inventory-management\file-storage
+
+white-list: | 
+  /video/saveVideo
+
+remove-path: /api/v1/vim

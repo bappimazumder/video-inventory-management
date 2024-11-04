@@ -9,8 +9,10 @@ public class ApiPath {
     public static final String API_GET_ALL_USER = "/getAllUser";
     public static final String API_VIDEO = PRODUCT_TITLE + "/video";
     public static final String API_POST_SAVE_VIDEO = "/saveVideo";
-    public static final String API_GET_VIDEO = "/getVideo";
+    public static final String API_GET_VIDEOS = "/getVideos";
     public static final String API_PUT_UPDATE_VIDEO = "/updateVideo";
+    public static final String API_PUT_DELETE_VIDEO = "/deleteVideo";
     public static final String API_PUT_ASSIGN_USER = "/assignUser";
+    public static final String API_ACTIVITY_LOG = PRODUCT_TITLE + "/activityLog";
 
 }

@@ -1,6 +1,5 @@
 package com.bappi.videoinventorymanagement.model.entity;
 
-import com.bappi.videoinventorymanagement.model.entity.UserDetails;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -6,6 +6,8 @@ import com.bappi.videoinventorymanagement.service.UserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserDetailsRepository repository;
@@ -16,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails getByCode(String code) {
-        return repository.findByCode(code);
+    public Optional<UserDetails> getById(Long id) {
+        return repository.findById(id);
     }
 }

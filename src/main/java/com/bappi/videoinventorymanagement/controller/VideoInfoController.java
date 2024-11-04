@@ -1,10 +1,11 @@
 package com.bappi.videoinventorymanagement.controller;
 
 import com.bappi.videoinventorymanagement.config.ApiPath;
-import com.bappi.videoinventorymanagement.model.dto.VideoInfoResponseDto;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoRequestDto;
+import com.bappi.videoinventorymanagement.model.dto.VideoInfoResponseDto;
 import com.bappi.videoinventorymanagement.service.VideoInfoService;
 import com.bappi.videoinventorymanagement.service.impl.VideoInfoServiceImpl;
+import com.bappi.videoinventorymanagement.utils.ResponsePayload;
 import com.bappi.videoinventorymanagement.utils.ServiceExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import static com.bappi.videoinventorymanagement.config.ApiPath.API_VIDEO;
+import static com.bappi.videoinventorymanagement.config.ApiPath.*;
 
 @Slf4j
 @RestController
@@ -32,11 +33,62 @@ public class VideoInfoController {
 
     @RequestMapping(value = ApiPath.API_POST_SAVE_VIDEO, method = { RequestMethod.POST },consumes = {MediaType.MULTIPART_FORM_DATA_VALUE })
     @ResponseBody
-    public HttpEntity<?> saveDocument(@RequestPart("data") VideoInfoRequestDto requestDto, @RequestPart("file") MultipartFile file) {
-        log.info( "Save Video for title: " + requestDto.getTitle() + " description " +requestDto.getDescription());
+    public HttpEntity<?> saveVideo(@RequestParam("title") String title,@RequestParam("description") String description,
+                                   @RequestParam("userCode")Long userId, @RequestParam("file") MultipartFile file) {
+        log.info( "Save Video for title: " + title + " description " + description);
+
+        VideoInfoRequestDto requestDto = new VideoInfoRequestDto();
+        requestDto.setTitle(title);
+        requestDto.setDescription(description);
+        requestDto.setUserId(userId);
 
         ServiceExceptionHandler<VideoInfoResponseDto> dataHandler = () -> service.save(requestDto,file);
 
         return new ResponseEntity<>(dataHandler.executeHandler(), HttpStatus.OK);
     }
+
+    @GetMapping(value=API_GET_VIDEOS)
+    public HttpEntity<ResponsePayload<VideoInfoResponseDto>> getVideos() {
+
+        log.info("Call Start getVideos() method for user {}",1);
+        ResponsePayload<VideoInfoResponseDto> dto = null;
+
+        ServiceExceptionHandler<ResponsePayload<VideoInfoResponseDto>> dataHandler = () -> service.getVideosByUser();
+        dto = dataHandler.executeHandler();
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @PutMapping(value=API_PUT_UPDATE_VIDEO+"/{id}")
+    public HttpEntity<?> updateVideo(@PathVariable Long id,@RequestBody VideoInfoRequestDto requestDto) {
+
+        log.info("Call Start update video details method ");
+        ResponsePayload<VideoInfoResponseDto> dto = null;
+
+        ServiceExceptionHandler<VideoInfoResponseDto> dataHandler = () -> service.update(id,requestDto);
+        dataHandler.executeHandler();
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
+    @DeleteMapping(value=API_PUT_DELETE_VIDEO+"/{id}")
+    public HttpEntity<?> deleteVideo(@PathVariable Long id) {
+
+        log.info("Call Start update video details method ");
+        ResponsePayload<VideoInfoResponseDto> dto = null;
+
+        ServiceExceptionHandler<?> dataHandler = () -> service.delete(id);
+        dataHandler.executeHandler();
+        return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @PutMapping(value=API_PUT_ASSIGN_USER+"/{videoId}"+"/{userId}")
+    public HttpEntity<?> assignVideo(@PathVariable Long videoId,@PathVariable Long userId) {
+
+        log.info("Call assign video");
+        ResponsePayload<VideoInfoResponseDto> dto = null;
+
+        ServiceExceptionHandler<VideoInfoResponseDto> dataHandler = () -> service.assignVideo(videoId,userId);
+        dataHandler.executeHandler();
+        return new ResponseEntity<>(dto, HttpStatus.OK);
+    }
+
 }
