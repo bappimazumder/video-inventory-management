@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface UserInfoService {
     Optional<UserInfo> getById(Long id);
-    Boolean addUser(UserInfoRequestDto requestDto);
+    String addUser(UserInfoRequestDto requestDto);
 }

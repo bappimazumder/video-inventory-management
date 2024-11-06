@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.bappi.videoinventorymanagement.config.Constant.MSG_USER_CREATED_SUCCESSFULLY;
+
 @Service
 public class UserInfoServiceImpl implements UserInfoService {
 
@@ -30,10 +32,10 @@ public class UserInfoServiceImpl implements UserInfoService {
         return repository.findById(id);
     }
 
-    public Boolean addUser(UserInfoRequestDto requestDto){
+    public String addUser(UserInfoRequestDto requestDto){
         UserInfo userInfo = objectMapper.map(requestDto);
         userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
         repository.save(userInfo);
-        return true;
+        return MSG_USER_CREATED_SUCCESSFULLY;
     }
 }

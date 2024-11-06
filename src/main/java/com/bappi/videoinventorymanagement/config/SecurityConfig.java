@@ -39,7 +39,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/v1/vim/user/authenticate").permitAll()
+                        .requestMatchers("/api/v1/vim/user/getToken").permitAll()
                         .requestMatchers("/api/v1/vim/**").authenticated()
                 )
                 .sessionManagement(session -> session
