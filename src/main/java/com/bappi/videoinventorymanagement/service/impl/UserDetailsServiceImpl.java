@@ -1,24 +1,29 @@
 package com.bappi.videoinventorymanagement.service.impl;
 
-import com.bappi.videoinventorymanagement.model.entity.UserDetails;
-import com.bappi.videoinventorymanagement.repository.UserDetailsRepository;
-import com.bappi.videoinventorymanagement.service.UserDetailsService;
+import com.bappi.videoinventorymanagement.model.entity.UserInfo;
+import com.bappi.videoinventorymanagement.model.entity.UserInfoUserDetails;
+import com.bappi.videoinventorymanagement.repository.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-@Service
+@Component
 public class UserDetailsServiceImpl implements UserDetailsService {
-    private final UserDetailsRepository repository;
 
     @Autowired
-    public UserDetailsServiceImpl(UserDetailsRepository repository) {
-        this.repository = repository;
-    }
+    private UserInfoRepository repository;
 
     @Override
-    public Optional<UserDetails> getById(Long id) {
-        return repository.findById(id);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<UserInfo> userInfo =  repository.findByEmail(username);
+        return userInfo.map(UserInfoUserDetails::new)
+                .orElseThrow(()-> new UsernameNotFoundException("User Not found "+username));
+
     }
+
+
 }

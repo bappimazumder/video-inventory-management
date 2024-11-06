@@ -21,7 +21,7 @@ public class ActivityLog {
 
     @ManyToOne
     @JoinColumn(name = USER_ID)
-    private UserDetails user;
+    private UserInfo user;
 
     @ManyToOne
     @JoinColumn(name = VIDEO_ID)

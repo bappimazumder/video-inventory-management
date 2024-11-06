@@ -29,7 +29,4 @@ spring:
 file:
   upload-dir: D:\Job\Celestial Invention\video-inventory-management\file-storage
 
-white-list: | 
-  /video/saveVideo
-
-remove-path: /api/v1/vim
+# remove-path: /api/v1/vim

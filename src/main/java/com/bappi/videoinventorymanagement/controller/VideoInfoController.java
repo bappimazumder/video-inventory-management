@@ -13,6 +13,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,6 +49,7 @@ public class VideoInfoController {
     }
 
     @GetMapping(value=API_GET_VIDEOS)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public HttpEntity<ResponsePayload<VideoInfoResponseDto>> getVideos() {
 
         log.info("Call Start getVideos() method for user {}",1);

@@ -31,5 +31,5 @@ public class VideoInfo {
 
     @ManyToOne
     @JoinColumn(name = ASSIGNED_TO_USER_ID)
-    private UserDetails assignedToUser;
+    private UserInfo assignedToUser;
 }
