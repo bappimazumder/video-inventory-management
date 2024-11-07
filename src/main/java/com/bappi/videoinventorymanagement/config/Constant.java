@@ -8,4 +8,8 @@ public class Constant {
     public static final String ROLE_ADMIN = "ROLE_ADMIN";
     public static final String ROLE_USER = "ROLE_USER";
     public static final String VIDEO_CODE_PREFIX = "VID-";
+    public static final String ACTION_TYPE_SAVE = "SAVE";
+    public static final String ACTION_TYPE_UPDATE = "UPDATE";
+    public static final String ACTION_TYPE_VIEW = "VIEW";
+    public static final String ACTION_TYPE_DELETE = "DELETE";
 }

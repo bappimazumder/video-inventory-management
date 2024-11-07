@@ -3,16 +3,18 @@ package com.bappi.videoinventorymanagement.service.impl;
 import com.bappi.videoinventorymanagement.config.SecurityContextUtils;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoRequestDto;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoResponseDto;
+import com.bappi.videoinventorymanagement.model.entity.ActivityLog;
 import com.bappi.videoinventorymanagement.model.entity.UserInfo;
 import com.bappi.videoinventorymanagement.model.entity.VideoInfo;
+import com.bappi.videoinventorymanagement.repository.ActivityLogRepository;
 import com.bappi.videoinventorymanagement.repository.UserInfoRepository;
 import com.bappi.videoinventorymanagement.repository.VideoInfoRepository;
 import com.bappi.videoinventorymanagement.service.FileService;
-import com.bappi.videoinventorymanagement.service.UserInfoService;
 import com.bappi.videoinventorymanagement.service.VideoInfoService;
 import com.bappi.videoinventorymanagement.utils.APIErrorCode;
 import com.bappi.videoinventorymanagement.utils.ResponsePayload;
 import com.bappi.videoinventorymanagement.utils.mapper.VideoInfoObjectMapper;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 import org.mapstruct.factory.Mappers;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.*;
 
 import static com.bappi.videoinventorymanagement.config.Constant.*;
@@ -31,21 +34,23 @@ public class VideoInfoServiceImpl implements VideoInfoService {
     private final String VIDEO_FORMAT = "Video";
     private static final long VEDIO_MAX_FILE_SIZE = 500 * 1024 * 1024;
     private final VideoInfoRepository repository;
-    private final UserInfoService userInfoService;
     private final FileService fileService;
-    private final UserInfoRepository userDetailsRepository;
+    private final UserInfoRepository userInfoRepository;
+    private final ActivityLogRepository activityLogRepository;
+
 
     private final VideoInfoObjectMapper objectMapper;
 
-    public VideoInfoServiceImpl(VideoInfoRepository repository, UserInfoService userInfoService, FileService fileService, UserInfoRepository userDetailsRepository) {
+    public VideoInfoServiceImpl(VideoInfoRepository repository, FileService fileService, UserInfoRepository userInfoRepository, ActivityLogRepository activityLogRepository) {
         this.repository = repository;
-        this.userInfoService = userInfoService;
         this.fileService = fileService;
-        this.userDetailsRepository = userDetailsRepository;
+        this.userInfoRepository = userInfoRepository;
+        this.activityLogRepository = activityLogRepository;
         this.objectMapper = Mappers.getMapper(VideoInfoObjectMapper.class);
     }
 
     @Override
+    @Transactional
     public VideoInfoResponseDto save(VideoInfoRequestDto requestDto, MultipartFile file){
         VideoInfoResponseDto responseDto = new VideoInfoResponseDto();
         if (requestDto.getTitle() == null || requestDto.getTitle().isEmpty()) {
@@ -104,7 +109,7 @@ public class VideoInfoServiceImpl implements VideoInfoService {
         videoInfo.setVideoUrl(videoUrlLocation);
 
         if(requestDto.getUserId() != null && requestDto.getUserId() > 0){
-            Optional<UserInfo> userDetails = userInfoService.getById(requestDto.getUserId());
+            Optional<UserInfo> userDetails = userInfoRepository.findById(requestDto.getUserId());
             if (userDetails.isPresent() && userDetails.get().getRoles().equals(ROLE_USER)){
                 videoInfo.setAssignedToUser(userDetails.get());
             }
@@ -112,7 +117,20 @@ public class VideoInfoServiceImpl implements VideoInfoService {
 
         VideoInfo savedObj = repository.save(videoInfo);
 
+        // Activity Log service Save
+        saveActivityLog(savedObj,ACTION_TYPE_SAVE);
+
         return objectMapper.map(savedObj);
+    }
+
+    private void saveActivityLog(VideoInfo savedObj,String actionType) {
+        ActivityLog activityLog = new ActivityLog();
+        Optional<UserInfo> userInfo = userInfoRepository.findByEmail(SecurityContextUtils.getUserName());
+        userInfo.ifPresent(activityLog::setUser);
+        activityLog.setVideoInfo(savedObj);
+        activityLog.setActivityAt(new Timestamp(System.currentTimeMillis()));
+        activityLog.setActionType(actionType);
+        activityLogRepository.save(activityLog);
     }
 
     @Override
@@ -122,7 +140,7 @@ public class VideoInfoServiceImpl implements VideoInfoService {
         if(userRoles.contains(ROLE_ADMIN)){
             videos = repository.findAll();
         }else{
-            Optional<UserInfo> userInfo =  userDetailsRepository.findByEmail(SecurityContextUtils.getUserName());
+            Optional<UserInfo> userInfo =  userInfoRepository.findByEmail(SecurityContextUtils.getUserName());
             if (userInfo.isPresent()){
                 videos = repository.findByAssignedToUserId(userInfo.get().getId());
             }
@@ -133,6 +151,7 @@ public class VideoInfoServiceImpl implements VideoInfoService {
     }
 
     @Override
+    @Transactional
     public VideoInfoResponseDto update(Long id ,VideoInfoRequestDto requestDto) {
         Optional<VideoInfo> existingObj = repository.findById(id);
         if(existingObj.isPresent()){
@@ -140,26 +159,31 @@ public class VideoInfoServiceImpl implements VideoInfoService {
             videoInfo.setDescription(requestDto.getDescription());
             videoInfo.setTitle(requestDto.getTitle());
             if(requestDto.getUserId() != null){
-                Optional<UserInfo> userDetails = userDetailsRepository.findById(requestDto.getUserId());
+                Optional<UserInfo> userDetails = userInfoRepository.findById(requestDto.getUserId());
                 userDetails.ifPresent(videoInfo::setAssignedToUser);
             }
             videoInfo = repository.save(videoInfo);
+
+            // Activity Log service Update
+            saveActivityLog(videoInfo,ACTION_TYPE_UPDATE);
+
             return objectMapper.map(videoInfo);
         }else {
             VideoInfoResponseDto responseDto = new VideoInfoResponseDto();
             responseDto.setErrorCode(APIErrorCode.NO_RECORD_FOUND);
             responseDto.setMessage("Invalid Video Id");
             return responseDto;
-
         }
-
 
     }
 
     @Override
+    @Transactional
     public Boolean delete(Long id) {
         Optional<VideoInfo> videoInfo = repository.findById(id);
         if (videoInfo.isPresent()){
+            // Activity Log service Update
+            saveActivityLog(videoInfo.get(),ACTION_TYPE_DELETE);
             repository.deleteById(id);
             return true;
         }else {
@@ -171,7 +195,7 @@ public class VideoInfoServiceImpl implements VideoInfoService {
     public VideoInfoResponseDto assignVideo(Long videoId, Long userId) {
 
         Optional<VideoInfo> videoInfo = repository.findById(videoId);
-        Optional<UserInfo> userDetails = userDetailsRepository.findById(userId);
+        Optional<UserInfo> userDetails = userInfoRepository.findById(userId);
         if (videoInfo.isPresent() && userDetails.isPresent()){
             VideoInfo video = videoInfo.get();
             video.setAssignedToUser(userDetails.get());
@@ -201,4 +225,6 @@ public class VideoInfoServiceImpl implements VideoInfoService {
             return "Unknown";
         }
     }
+
+
 }

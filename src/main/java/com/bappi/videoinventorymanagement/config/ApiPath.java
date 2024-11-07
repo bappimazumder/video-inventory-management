@@ -13,7 +13,10 @@ public class ApiPath {
     public static final String API_PUT_UPDATE_VIDEO = "/updateVideo";
     public static final String API_DELETE_VIDEO = "/deleteVideo";
     public static final String API_PUT_ASSIGN_USER = "/assignUser";
+    public static final String API_GET_VIEW_VIDEO = "/viewVideo";
     public static final String API_ACTIVITY_LOG = PRODUCT_TITLE + "/activityLog";
     public static final String API_POST_USER_GET_TOKEN = "/getToken";
+
+
 
 }

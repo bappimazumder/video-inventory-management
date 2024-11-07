@@ -1,31 +1,26 @@
 package com.bappi.videoinventorymanagement.controller;
 
 import com.bappi.videoinventorymanagement.config.ApiPath;
-import com.bappi.videoinventorymanagement.config.SecurityContextUtils;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoRequestDto;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoResponseDto;
-import com.bappi.videoinventorymanagement.service.UserInfoService;
+import com.bappi.videoinventorymanagement.service.FileService;
 import com.bappi.videoinventorymanagement.service.VideoInfoService;
 import com.bappi.videoinventorymanagement.service.impl.VideoInfoServiceImpl;
-import com.bappi.videoinventorymanagement.utils.APIErrorCode;
-import com.bappi.videoinventorymanagement.utils.CustomException;
 import com.bappi.videoinventorymanagement.utils.ResponsePayload;
 import com.bappi.videoinventorymanagement.utils.ServiceExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Set;
+import java.io.InputStream;
 
 import static com.bappi.videoinventorymanagement.config.ApiPath.*;
 
@@ -34,15 +29,13 @@ import static com.bappi.videoinventorymanagement.config.ApiPath.*;
 @RequestMapping(API_VIDEO)
 public class VideoInfoController {
 
-
-
     private final VideoInfoService service;
-    private final UserInfoService userInfoService;
+    private final FileService fileService;
 
     @Autowired
-    public VideoInfoController(VideoInfoServiceImpl videoInfoServiceImpl, UserInfoService userInfoService) {
+    public VideoInfoController(VideoInfoServiceImpl videoInfoServiceImpl, FileService fileService) {
         this.service = videoInfoServiceImpl;
-        this.userInfoService = userInfoService;
+        this.fileService = fileService;
     }
 
     @PostMapping(value = ApiPath.API_POST_SAVE_VIDEO,consumes = {MediaType.MULTIPART_FORM_DATA_VALUE })
@@ -113,6 +106,33 @@ public class VideoInfoController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @GetMapping(value = ApiPath.API_GET_VIEW_VIDEO)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
+    public ResponseEntity<ByteArrayResource> getDocument(@RequestParam(value="fileName") String fileName, @RequestParam(name="attachmentViewType", defaultValue="attachment") String attachmentViewType) throws IOException {
 
+        ServiceExceptionHandler<FileInputStream> dataHandler = () ->  fileService.downloadFileFromFileStorage(fileName);
+        InputStreamResource resource = new InputStreamResource(dataHandler.executeHandler());
+        HttpHeaders headers = fileService.getHeader(fileName);
+        ByteArrayResource byteArrayResource =  convertToByteArrayResource(resource);
+        return ResponseEntity.ok().headers(headers).contentType(fileService.getContentType(fileName)).body(byteArrayResource);
+
+    }
+
+    public static ByteArrayResource convertToByteArrayResource(InputStreamResource inputStreamResource) throws IOException, IOException {
+
+        InputStream inputStream = inputStreamResource.getInputStream();
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = inputStream.read(buffer)) != -1) {
+            byteArrayOutputStream.write(buffer, 0, length);
+        }
+
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+
+        return new ByteArrayResource(byteArray);
+    }
 
 }
