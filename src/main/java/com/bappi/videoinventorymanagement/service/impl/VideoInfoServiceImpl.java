@@ -110,8 +110,11 @@ public class VideoInfoServiceImpl implements VideoInfoService {
 
         if(requestDto.getUserId() != null && requestDto.getUserId() > 0){
             Optional<UserInfo> userDetails = userInfoRepository.findById(requestDto.getUserId());
-            if (userDetails.isPresent() && userDetails.get().getRoles().equals(ROLE_USER)){
-                videoInfo.setAssignedToUser(userDetails.get());
+            if (userDetails.isPresent()){
+                UserInfo user = userDetails.get();
+                if (user.getRoles() != null && user.getRoles().equals(ROLE_USER)) {
+                    videoInfo.setAssignedToUser(user);
+                }
             }
         }
 
@@ -216,7 +219,9 @@ public class VideoInfoServiceImpl implements VideoInfoService {
             return "Video";
         } else if (mimeType.startsWith("application/pdf") || mimeType.startsWith("text") || mimeType.startsWith("application/msword")) {
             return "Document";
-        } else {
+        }else if(mimeType.startsWith("application/octet-stream")){
+            return "Video";
+        }else {
             return "Unknown";
         }
     }

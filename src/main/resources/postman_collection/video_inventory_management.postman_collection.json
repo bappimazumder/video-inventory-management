@@ -1,0 +1,1124 @@
+{
+	"info": {
+		"_postman_id": "f0f7e511-f9bb-4291-8612-e3fe13f64123",
+		"name": "VideoInventaryManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "9436090",
+		"_collection_link": "https://lunar-eclipse-761053.postman.co/workspace/Team-Workspace~4c33cdca-8dd6-4d97-8e73-f93f4cc8a9a3/collection/9436090-f0f7e511-f9bb-4291-8612-e3fe13f64123?action=share&source=collection_link&creator=9436090"
+	},
+	"item": [
+		{
+			"name": "saveVideo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5OTExMTYsImV4cCI6MTczMDk5MjMxNn0.9YUl8GYgh4zuq0cENyjDFbEQ4dgZO3VBfmzPiL-oi1A"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Title Video 3",
+							"contentType": "text/plain",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"contentType": "video/mp4",
+							"type": "file",
+							"src": "/C:/Users/User/Desktop/sample_video1.mp4"
+						},
+						{
+							"key": "description",
+							"value": "Test Video upload 3",
+							"contentType": "text/plain",
+							"type": "text"
+						},
+						{
+							"key": "assignUserId",
+							"value": "2",
+							"contentType": "text/plain",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8095/api/v1/vim/video/saveVideo"
+			},
+			"response": [
+				{
+					"name": "saveVideo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Title Video 2",
+									"contentType": "text/plain",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "video/mp4",
+									"type": "file",
+									"src": "/C:/Users/User/Desktop/sample_video1.mp4"
+								},
+								{
+									"key": "description",
+									"value": "Test Video upload 2",
+									"contentType": "text/plain",
+									"type": "text"
+								},
+								{
+									"key": "assignUserId",
+									"value": "2",
+									"contentType": "text/plain",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8095/api/v1/vim/video/saveVideo"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 08:54:09 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"VID-1730969649\",\n    \"title\": \"Title Video 2\",\n    \"description\": \"Test Video upload 2\",\n    \"videoUrl\": \"1730969649138_sample_video1.mp4\"\n}"
+				},
+				{
+					"name": "saveVideo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Title Video 2",
+									"contentType": "text/plain",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "video/mp4",
+									"type": "file",
+									"src": "/C:/Users/User/Desktop/sample_video1.mp4"
+								},
+								{
+									"key": "description",
+									"value": "Test Video upload 2",
+									"contentType": "text/plain",
+									"type": "text"
+								},
+								{
+									"key": "assignUserId",
+									"value": "3",
+									"contentType": "text/plain",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8095/api/v1/vim/video/saveVideo"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 10:24:46 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"VID-1730975086\",\n    \"title\": \"Title Video 2\",\n    \"description\": \"Test Video upload 2\",\n    \"videoUrl\": \"1730975086780_sample_video1.mp4\",\n    \"message\": null,\n    \"errorCode\": null\n}"
+				},
+				{
+					"name": "saveVideo",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Title Video 2",
+									"contentType": "text/plain",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"contentType": "video/mp4",
+									"type": "file",
+									"src": "postman-cloud:///1ef9a938-6a25-43f0-8013-0b197b9151a8"
+								},
+								{
+									"key": "description",
+									"value": "Test Video upload 2",
+									"contentType": "text/plain",
+									"type": "text"
+								},
+								{
+									"key": "assignUserId",
+									"value": "3",
+									"contentType": "text/plain",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://localhost:8095/api/v1/vim/video/saveVideo"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 10:26:00 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": null,\n    \"title\": null,\n    \"description\": null,\n    \"videoUrl\": null,\n    \"message\": \"Invalid File Format\",\n    \"errorCode\": \"INVALID_REQUEST\"\n}"
+				}
+			]
+		},
+		{
+			"name": "getVideos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5ODE3MzMsImV4cCI6MTczMDk4MjkzM30.OXGO8Zdu8zKUeLl_7dYneQtmOkUsn3nIvrqbx2yfaAo"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8095/api/v1/vim/video/getVideos"
+			},
+			"response": [
+				{
+					"name": "getVideos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8095/api/v1/vim/video/getVideos"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 10:59:10 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"totalPages\": null,\n    \"currentPage\": null,\n    \"dataList\": [\n        {\n            \"code\": \"VID-1730969649\",\n            \"title\": \"Title Video 2\",\n            \"description\": \"Test Video upload 2\",\n            \"videoUrl\": \"1730969649138_sample_video1.mp4\",\n            \"message\": null,\n            \"errorCode\": null\n        },\n        {\n            \"code\": \"VID-1730969861\",\n            \"title\": \"Title Video 1\",\n            \"description\": \"Test Video upload 1\",\n            \"videoUrl\": \"1730969861222_6IHf92bfog3.png\",\n            \"message\": null,\n            \"errorCode\": null\n        }\n    ]\n}"
+				},
+				{
+					"name": "getVideos",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8095/api/v1/vim/video/getVideos"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 12:16:22 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"totalPages\": null,\n    \"currentPage\": null,\n    \"dataList\": [\n        {\n            \"code\": \"VID-1730969799\",\n            \"title\": \"Title Video 1\",\n            \"description\": \"Test Video upload 1\",\n            \"videoUrl\": \"1730969799893_sample_video1.mp4\",\n            \"userId\": 2,\n            \"userName\": \"john@gmail.com\",\n            \"message\": null,\n            \"errorCode\": null\n        },\n        {\n            \"code\": \"VID-1730969861\",\n            \"title\": \"Title Video 1\",\n            \"description\": \"Test Video upload 1\",\n            \"videoUrl\": \"1730969861222_6IHf92bfog3.png\",\n            \"userId\": 2,\n            \"userName\": \"john@gmail.com\",\n            \"message\": null,\n            \"errorCode\": null\n        },\n        {\n            \"code\": \"VID-1730973727\",\n            \"title\": \"Title Video 2\",\n            \"description\": \"Test Video upload 2\",\n            \"videoUrl\": \"1730973727828_sample_video1.mp4\",\n            \"userId\": 3,\n            \"userName\": \"bonny@gmail.com\",\n            \"message\": null,\n            \"errorCode\": null\n        },\n        {\n            \"code\": \"VID-1730975086\",\n            \"title\": \"Title Video 2\",\n            \"description\": \"Test Video upload 2\",\n            \"videoUrl\": \"1730975086780_sample_video1.mp4\",\n            \"userId\": 3,\n            \"userName\": \"bonny@gmail.com\",\n            \"message\": null,\n            \"errorCode\": null\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "updateVideo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5Nzc5MTMsImV4cCI6MTczMDk3OTExM30.TBjOc9weP3SPyTxqo4bgoql6Anb2JteLValOCwvXBqM"
+					}
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{   \r\n    \"description\":\"rrrrrrrrrr\",\r\n     \"title\":\"New Title2\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8095/api/v1/vim/video/updateVideo/1"
+			},
+			"response": [
+				{
+					"name": "updateVideo",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"description\":\"rrrrrrrrrr\",\r\n     \"title\":\"New Title2\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8095/api/v1/vim/video/updateVideo/1"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 11:12:05 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"VID-1730969649\",\n    \"title\": \"New Title2\",\n    \"description\": \"rrrrrrrrrr\",\n    \"videoUrl\": \"1730969649138_sample_video1.mp4\",\n    \"message\": null,\n    \"errorCode\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "deleteVideo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5NzkxMjYsImV4cCI6MTczMDk4MDMyNn0.6quXD5Is2fKs_H6Vx6yawOjMcIsChUsrvTuiyzg6AoU"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "http://localhost:8095/api/v1/vim/video/deleteVideo/1"
+			},
+			"response": [
+				{
+					"name": "deleteVideo",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8095/api/v1/vim/video/deleteVideo/1"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "19"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 11:32:24 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "DELETE SUCCESSFULLY"
+				},
+				{
+					"name": "deleteVideo",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8095/api/v1/vim/video/deleteVideo/9"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "13"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 11:32:55 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "DELETE FAILED"
+				}
+			]
+		},
+		{
+			"name": "userRegistration",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5Njk1NDcsImV4cCI6MTczMDk3MDc0N30.QY9XIck6g8ZHpfHU74bFxCeRO24P22MRFgMurE76QTE"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fullName\":\"john\",\r\n    \"password\":\"1234567\",\r\n    \"email\":\"john@gmail.com\",\r\n    \"roles\":\"ROLE_USER\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8095/api/v1/vim/user/addUser"
+			},
+			"response": [
+				{
+					"name": "userRegistration",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\":\"john\",\r\n    \"password\":\"1234567\",\r\n    \"email\":\"john@gmail.com\",\r\n    \"roles\":\"ROLE_USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8095/api/v1/vim/user/addUser"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 15:53:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "User Created Successfully"
+				},
+				{
+					"name": "userRegistration",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\":\"Bonny\",\r\n    \"password\":\"1234567\",\r\n    \"email\":\"boony@gmail.com\",\r\n    \"roles\":\"ROLE_USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8095/api/v1/vim/user/addUser"
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "25"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 08:40:10 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "User Created Successfully"
+				}
+			]
+		},
+		{
+			"name": "GetToken",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"admin@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8095/api/v1/vim/user/getToken"
+			},
+			"response": [
+				{
+					"name": "Authenticate",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"admin@gmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8095/api/v1/vim/user/getToken"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=ISO-8859-1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "144"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 06 Nov 2024 15:04:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5MDU0NjMsImV4cCI6MTczMDkwNjY2M30.5qWfEjCK6XXzpmyjwY1cYEd1rmRP20C3JklhGtJVXMA"
+				}
+			]
+		},
+		{
+			"name": "VideoAssignUser",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5ODAyMzIsImV4cCI6MTczMDk4MTQzMn0.LV6X-B9lX6ImGuhBf6_AU3p5v-SkBl7D76fPPgRcIIM"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8095/api/v1/vim/video/assignUser/2/2"
+			},
+			"response": [
+				{
+					"name": "VideoAssignUser",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": "http://localhost:8095/api/v1/vim/video/assignUser/2/2"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 11:50:45 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": \"VID-1730969799\",\n    \"title\": \"Title Video 1\",\n    \"description\": \"Test Video upload 1\",\n    \"videoUrl\": \"1730969799893_sample_video1.mp4\",\n    \"message\": null,\n    \"errorCode\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "viewVideo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5ODkyNzIsImV4cCI6MTczMDk5MDQ3Mn0.mkf0OfdTE6f_xoS1uOrQsl8-TH9xNC8TOLhNHLZQxEg"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8095/api/v1/vim/video/viewVideo?fileName=1730975086780_sample_video1.mp4&attachmentViewType=attachment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8095",
+					"path": [
+						"api",
+						"v1",
+						"vim",
+						"video",
+						"viewVideo"
+					],
+					"query": [
+						{
+							"key": "fileName",
+							"value": "1730975086780_sample_video1.mp4"
+						},
+						{
+							"key": "attachmentViewType",
+							"value": "attachment"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllActivityLog",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE3MzA5OTExMTYsImV4cCI6MTczMDk5MjMxNn0.9YUl8GYgh4zuq0cENyjDFbEQ4dgZO3VBfmzPiL-oi1A"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8095/api/v1/vim/activityLog/getAllActivity"
+			},
+			"response": [
+				{
+					"name": "getAllActivityLog",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8095/api/v1/vim/activityLog/getAllActivity"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 07 Nov 2024 14:53:54 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"totalPages\": null,\n    \"currentPage\": null,\n    \"dataList\": [\n        {\n            \"userId\": \"1\",\n            \"videoId\": \"6\",\n            \"activityAt\": 1730991196252,\n            \"actionType\": \"SAVE\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}
