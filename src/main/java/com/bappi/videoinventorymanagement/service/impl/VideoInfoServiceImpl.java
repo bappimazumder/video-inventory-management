@@ -123,15 +123,7 @@ public class VideoInfoServiceImpl implements VideoInfoService {
         return objectMapper.map(savedObj);
     }
 
-    private void saveActivityLog(VideoInfo savedObj,String actionType) {
-        ActivityLog activityLog = new ActivityLog();
-        Optional<UserInfo> userInfo = userInfoRepository.findByEmail(SecurityContextUtils.getUserName());
-        userInfo.ifPresent(activityLog::setUser);
-        activityLog.setVideoInfo(savedObj);
-        activityLog.setActivityAt(new Timestamp(System.currentTimeMillis()));
-        activityLog.setActionType(actionType);
-        activityLogRepository.save(activityLog);
-    }
+
 
     @Override
     public ResponsePayload<VideoInfoResponseDto> getVideosByUser() {
@@ -200,6 +192,9 @@ public class VideoInfoServiceImpl implements VideoInfoService {
             VideoInfo video = videoInfo.get();
             video.setAssignedToUser(userDetails.get());
             video = repository.save(video);
+            // Activity Log service Update
+            saveActivityLog(video,ACTION_TYPE_UPDATE);
+
             return objectMapper.map(video);
         }else {
             VideoInfoResponseDto responseDto = new VideoInfoResponseDto();
@@ -226,5 +221,14 @@ public class VideoInfoServiceImpl implements VideoInfoService {
         }
     }
 
+    private void saveActivityLog(VideoInfo savedObj,String actionType) {
+        ActivityLog activityLog = new ActivityLog();
+        Optional<UserInfo> userInfo = userInfoRepository.findByEmail(SecurityContextUtils.getUserName());
+        userInfo.ifPresent(activityLog::setUser);
+        activityLog.setVideoInfo(savedObj);
+        activityLog.setActivityAt(new Timestamp(System.currentTimeMillis()));
+        activityLog.setActionType(actionType);
+        activityLogRepository.save(activityLog);
+    }
 
 }

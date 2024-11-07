@@ -108,12 +108,13 @@ public class VideoInfoController {
 
     @GetMapping(value = ApiPath.API_GET_VIEW_VIDEO)
     @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
-    public ResponseEntity<ByteArrayResource> getDocument(@RequestParam(value="fileName") String fileName, @RequestParam(name="attachmentViewType", defaultValue="attachment") String attachmentViewType) throws IOException {
+    public ResponseEntity<ByteArrayResource> viewVideo(@RequestParam(value="fileName") String fileName, @RequestParam(name="attachmentViewType", defaultValue="attachment") String attachmentViewType) throws IOException {
 
         ServiceExceptionHandler<FileInputStream> dataHandler = () ->  fileService.downloadFileFromFileStorage(fileName);
         InputStreamResource resource = new InputStreamResource(dataHandler.executeHandler());
         HttpHeaders headers = fileService.getHeader(fileName);
         ByteArrayResource byteArrayResource =  convertToByteArrayResource(resource);
+        // Here we can apply for activity log
         return ResponseEntity.ok().headers(headers).contentType(fileService.getContentType(fileName)).body(byteArrayResource);
 
     }

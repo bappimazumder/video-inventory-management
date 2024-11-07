@@ -6,6 +6,7 @@ public class ApiPath {
     public static final String API_BASE_PATH = API_CORE_NAME + API_VERSION;
     public static final String PRODUCT_TITLE = "/vim";
     public static final String API_USER = PRODUCT_TITLE + "/user";
+    public static final String API_POST_USER_GET_TOKEN = "/getToken";
     public static final String API_POST_ADD_USER = "/addUser";
     public static final String API_VIDEO = PRODUCT_TITLE + "/video";
     public static final String API_POST_SAVE_VIDEO = "/saveVideo";
@@ -15,7 +16,8 @@ public class ApiPath {
     public static final String API_PUT_ASSIGN_USER = "/assignUser";
     public static final String API_GET_VIEW_VIDEO = "/viewVideo";
     public static final String API_ACTIVITY_LOG = PRODUCT_TITLE + "/activityLog";
-    public static final String API_POST_USER_GET_TOKEN = "/getToken";
+    public static final String API_GET_ALL_ACTIVITY_LOG = "/getAllActivity";
+
 
 
 
