@@ -5,6 +5,8 @@ import com.bappi.videoinventorymanagement.model.dto.VideoInfoResponseDto;
 import com.bappi.videoinventorymanagement.utils.ResponsePayload;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 public interface VideoInfoService {
 
     VideoInfoResponseDto save(VideoInfoRequestDto requestDto, MultipartFile file);

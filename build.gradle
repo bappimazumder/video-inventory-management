@@ -42,9 +42,10 @@ dependencies {
 			"org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.5' // API interface
-	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5' // Implementation
-	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5' // Jackson for JSON support
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+	implementation group: 'org.apache.tika', name: 'tika-core', version: '2.9.2'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

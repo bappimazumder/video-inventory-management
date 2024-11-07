@@ -3,11 +3,15 @@ package com.bappi.videoinventorymanagement.controller;
 import com.bappi.videoinventorymanagement.config.ApiPath;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoRequestDto;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoResponseDto;
+import com.bappi.videoinventorymanagement.service.UserInfoService;
 import com.bappi.videoinventorymanagement.service.VideoInfoService;
 import com.bappi.videoinventorymanagement.service.impl.VideoInfoServiceImpl;
+import com.bappi.videoinventorymanagement.utils.APIErrorCode;
+import com.bappi.videoinventorymanagement.utils.CustomException;
 import com.bappi.videoinventorymanagement.utils.ResponsePayload;
 import com.bappi.videoinventorymanagement.utils.ServiceExceptionHandler;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -17,6 +21,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 import static com.bappi.videoinventorymanagement.config.ApiPath.*;
 
 @Slf4j
@@ -25,18 +32,22 @@ import static com.bappi.videoinventorymanagement.config.ApiPath.*;
 public class VideoInfoController {
 
 
+
     private final VideoInfoService service;
+    private final UserInfoService userInfoService;
 
     @Autowired
-    public VideoInfoController(VideoInfoServiceImpl videoInfoServiceImpl) {
+    public VideoInfoController(VideoInfoServiceImpl videoInfoServiceImpl, UserInfoService userInfoService) {
         this.service = videoInfoServiceImpl;
+        this.userInfoService = userInfoService;
     }
 
-    @RequestMapping(value = ApiPath.API_POST_SAVE_VIDEO, method = { RequestMethod.POST },consumes = {MediaType.MULTIPART_FORM_DATA_VALUE })
+    @PostMapping(value = ApiPath.API_POST_SAVE_VIDEO,consumes = {MediaType.MULTIPART_FORM_DATA_VALUE })
     @ResponseBody
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public HttpEntity<?> saveVideo(@RequestParam("title") String title,@RequestParam("description") String description,
-                                   @RequestParam("userCode")Long userId, @RequestParam("file") MultipartFile file) {
-        log.info( "Save Video for title: " + title + " description " + description);
+                                   @RequestParam("assignUserId")Long userId, @RequestParam("file") MultipartFile file){
+     log.info( "Call Save Video for title: " + title + " description " + description);
 
         VideoInfoRequestDto requestDto = new VideoInfoRequestDto();
         requestDto.setTitle(title);
@@ -92,5 +103,7 @@ public class VideoInfoController {
         dataHandler.executeHandler();
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+
+
 
 }
