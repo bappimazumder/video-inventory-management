@@ -11,13 +11,11 @@ import com.bappi.videoinventorymanagement.service.FileService;
 import com.bappi.videoinventorymanagement.service.UserInfoService;
 import com.bappi.videoinventorymanagement.service.VideoInfoService;
 import com.bappi.videoinventorymanagement.utils.APIErrorCode;
-import com.bappi.videoinventorymanagement.utils.CustomException;
 import com.bappi.videoinventorymanagement.utils.ResponsePayload;
 import com.bappi.videoinventorymanagement.utils.mapper.VideoInfoObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tika.Tika;
 import org.mapstruct.factory.Mappers;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

@@ -11,11 +11,12 @@ import lombok.Setter;
 @Setter
 @Getter
 public class VideoInfoResponseDto {
-
     private String code;
     private String title;
     private String description;
     private String videoUrl;
+    private Long userId;
+    private String userName;
     private String message;
     private IAPIErrorCode errorCode;
 }
