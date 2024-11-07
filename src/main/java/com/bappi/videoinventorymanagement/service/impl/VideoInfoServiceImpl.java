@@ -1,5 +1,6 @@
 package com.bappi.videoinventorymanagement.service.impl;
 
+import com.bappi.videoinventorymanagement.config.SecurityContextUtils;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoRequestDto;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoResponseDto;
 import com.bappi.videoinventorymanagement.model.entity.UserInfo;
@@ -21,9 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static com.bappi.videoinventorymanagement.config.Constant.*;
 
@@ -120,7 +119,17 @@ public class VideoInfoServiceImpl implements VideoInfoService {
 
     @Override
     public ResponsePayload<VideoInfoResponseDto> getVideosByUser() {
-        List<VideoInfo> videos = repository.findByAssignedToUserId(1L);
+        List<VideoInfo> videos = new ArrayList<>();
+        Set<String> userRoles =  SecurityContextUtils.getUserRoles();
+        if(userRoles.contains(ROLE_ADMIN)){
+            videos = repository.findAll();
+        }else{
+            Optional<UserInfo> userInfo =  userDetailsRepository.findByEmail(SecurityContextUtils.getUserName());
+            if (userInfo.isPresent()){
+                videos = repository.findByAssignedToUserId(userInfo.get().getId());
+            }
+        }
+
         return ResponsePayload.<VideoInfoResponseDto>builder()
                 .dataList(objectMapper.map(videos)).build();
     }

@@ -1,6 +1,7 @@
 package com.bappi.videoinventorymanagement.controller;
 
 import com.bappi.videoinventorymanagement.config.ApiPath;
+import com.bappi.videoinventorymanagement.config.SecurityContextUtils;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoRequestDto;
 import com.bappi.videoinventorymanagement.model.dto.VideoInfoResponseDto;
 import com.bappi.videoinventorymanagement.service.UserInfoService;
@@ -18,11 +19,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Set;
 
 import static com.bappi.videoinventorymanagement.config.ApiPath.*;
 
@@ -60,13 +63,13 @@ public class VideoInfoController {
     }
 
     @GetMapping(value=API_GET_VIDEOS)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_USER')")
     public HttpEntity<ResponsePayload<VideoInfoResponseDto>> getVideos() {
 
         log.info("Call Start getVideos() method for user {}",1);
         ResponsePayload<VideoInfoResponseDto> dto = null;
 
-        ServiceExceptionHandler<ResponsePayload<VideoInfoResponseDto>> dataHandler = () -> service.getVideosByUser();
+        ServiceExceptionHandler<ResponsePayload<VideoInfoResponseDto>> dataHandler = service::getVideosByUser;
         dto = dataHandler.executeHandler();
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
