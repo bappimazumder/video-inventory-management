@@ -75,35 +75,41 @@ public class VideoInfoController {
     }
 
     @PutMapping(value=API_PUT_UPDATE_VIDEO+"/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public HttpEntity<?> updateVideo(@PathVariable Long id,@RequestBody VideoInfoRequestDto requestDto) {
 
         log.info("Call Start update video details method ");
-        ResponsePayload<VideoInfoResponseDto> dto = null;
 
         ServiceExceptionHandler<VideoInfoResponseDto> dataHandler = () -> service.update(id,requestDto);
-        dataHandler.executeHandler();
+        VideoInfoResponseDto dto =  dataHandler.executeHandler();
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
-    @DeleteMapping(value=API_PUT_DELETE_VIDEO+"/{id}")
+    @DeleteMapping(value=API_DELETE_VIDEO+"/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public HttpEntity<?> deleteVideo(@PathVariable Long id) {
 
         log.info("Call Start update video details method ");
         ResponsePayload<VideoInfoResponseDto> dto = null;
 
-        ServiceExceptionHandler<?> dataHandler = () -> service.delete(id);
-        dataHandler.executeHandler();
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        ServiceExceptionHandler<Boolean> dataHandler = () -> service.delete(id);
+        Boolean result = dataHandler.executeHandler();
+        String message = "DELETE FAILED";
+        if (result){
+            message = "DELETE SUCCESSFULLY";
+        }
+        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
-    @PutMapping(value=API_PUT_ASSIGN_USER+"/{videoId}"+"/{userId}")
+    @PostMapping(value=API_PUT_ASSIGN_USER+"/{videoId}"+"/{userId}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public HttpEntity<?> assignVideo(@PathVariable Long videoId,@PathVariable Long userId) {
 
         log.info("Call assign video");
-        ResponsePayload<VideoInfoResponseDto> dto = null;
+        VideoInfoResponseDto dto = null;
 
         ServiceExceptionHandler<VideoInfoResponseDto> dataHandler = () -> service.assignVideo(videoId,userId);
-        dataHandler.executeHandler();
+        dto = dataHandler.executeHandler();
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 

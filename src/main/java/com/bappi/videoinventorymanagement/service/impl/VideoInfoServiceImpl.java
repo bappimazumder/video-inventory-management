@@ -147,15 +147,26 @@ public class VideoInfoServiceImpl implements VideoInfoService {
             }
             videoInfo = repository.save(videoInfo);
             return objectMapper.map(videoInfo);
+        }else {
+            VideoInfoResponseDto responseDto = new VideoInfoResponseDto();
+            responseDto.setErrorCode(APIErrorCode.NO_RECORD_FOUND);
+            responseDto.setMessage("Invalid Video Id");
+            return responseDto;
+
         }
-        return new VideoInfoResponseDto();
+
 
     }
 
     @Override
     public Boolean delete(Long id) {
-        repository.deleteById(id);
-        return true;
+        Optional<VideoInfo> videoInfo = repository.findById(id);
+        if (videoInfo.isPresent()){
+            repository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
@@ -168,8 +179,12 @@ public class VideoInfoServiceImpl implements VideoInfoService {
             video.setAssignedToUser(userDetails.get());
             video = repository.save(video);
             return objectMapper.map(video);
+        }else {
+            VideoInfoResponseDto responseDto = new VideoInfoResponseDto();
+            responseDto.setErrorCode(APIErrorCode.INVALID_REQUEST);
+            responseDto.setMessage("Invalid Data Found");
+            return responseDto;
         }
-        return null;
     }
 
     public String getFileType(MultipartFile file) throws IOException {
